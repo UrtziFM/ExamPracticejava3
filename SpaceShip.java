@@ -1,6 +1,8 @@
+import java.util.Scanner;
+
 public class SpaceShip extends SpaceShipAbstract {
 
-    private int numberOfPassengers;
+    private String numberOfPassengers;
 
     // Constructor
     public SpaceShip() {
@@ -9,21 +11,26 @@ public class SpaceShip extends SpaceShipAbstract {
 
     public void fly(){
 
-        numberOfPassengers = 0;
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Please enter an integer number: ");
+            numberOfPassengers = scanner.nextLine();
         
-        try {
-            for (int i = 0; i < 11; i++) {
-                System.out.println("Passenger " + i + " IN!");
-                if (i == 10) {
-                    numberOfPassengers = i;
-                    System.out.println("Passenger " + numberOfPassengers + "OUT!");
-                    throw new ArithmeticException();
-                }
-            }   
-        } catch (ArithmeticException e) {
-            System.out.println("Exception caught: " + e);
-        } finally {
-            System.out.println("Finally block executed.");
+            try {
+                int num = ShipExceptions.numberTransformation(numberOfPassengers);
+                for (int i = 0; i < num + 1; i++) {
+                    System.out.println("Passenger " + i + " IN!");
+                    if (i == num) {
+                        System.out.println("Sorry but finally Passenger " + numberOfPassengers + " OUT!");
+                        throw new IllegalStateException();
+                    }
+                }   
+            } catch (NumberFormatException e) {
+                System.out.println("Exception caught: " + e);
+            } catch (IllegalStateException e) {
+                System.out.println("Exception caught: " + "Passenger " + numberOfPassengers + " OUT!  The ship is full.");
+            } finally {
+                System.out.println("Finally block executed.");
+            }
         }
     }
     
