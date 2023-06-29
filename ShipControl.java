@@ -42,11 +42,21 @@ public class ShipControl extends JFrame implements ActionListener{
         panel.add(label, BorderLayout.CENTER);
 		panel.add(text, BorderLayout.SOUTH);
 
-        // Agregar ActionListener al botón startButton
-        startButton.addActionListener(this);
-
+        
         // Agregar el panel al contenido del JFrame
         add(panel);
+
+        startButton.addActionListener(new ActionListener(){
+
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para manejar el evento de clic del botón startButton
+                if (e.getSource() == startButton) {
+                    // Crear instancia de la clase SpaceShip
+                    SpaceShip spaceShip = new SpaceShip();
+                    spaceShip.fly();
+                }
+            }
+        });
 
         // Mostrar la interfaz gráfica
         setVisible(true);
@@ -54,14 +64,9 @@ public class ShipControl extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Lógica para manejar el evento de clic del botón startButton
-        if (e.getSource() == startButton) {
-            // Crear instancia de la clase SpaceShip
-            SpaceShip spaceShip = new SpaceShip();
-            spaceShip.fly();
-        }
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-
 
     public static void main(String[] args) {
 		// Crear y mostrar la interfaz gr�fica en el hilo de eventos de Swing
@@ -69,4 +74,6 @@ public class ShipControl extends JFrame implements ActionListener{
 			new ShipControl();
 		});
 	}
+
+   
 }
